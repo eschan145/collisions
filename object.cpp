@@ -14,12 +14,12 @@ private:
     float dy;
 
 public:
-    Object(Point pos): {
+    Object(Point pos, float dx, float dy) {
         this->position = pos;
-        this->width;
-        this->height;
-        this->dx = 15;
-        this->dy = 15;
+        this->width = 15;
+        this->height = 15;
+        this->dx = dx;
+        this->dy = dy;
     }
 
     void update() {
@@ -28,8 +28,8 @@ public:
     }
 
     void bounce(int width, int height) {
-        if (x <= 0 || x + width >= width) dx = -dx;
-        if (y <= 0 || y + height >= height) dy = -dy;
+        if (this->position.x <= 0 || this->position.x + width >= width) this->dx = -this->dx;
+        if (this->position.y <= 0 || this->position.y + height >= height) this->dy = -this->dy;
     }
 
     void draw(HDC hdc) const {

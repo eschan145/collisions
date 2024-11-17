@@ -12,8 +12,8 @@ void initialize(int count, int width, int height) {
         Point position = Point(
             rand() % (width - 50),
             rand() % (height - 50));
-        int dx = (rand() % 5) + 1;
-        int dy = (rand() % 5) + 1;
+        float dx = (rand() % 5) + 1;
+        float dy = (rand() % 5) + 1;
 
         objects.emplace_back(position, dx, dy);
     }
@@ -54,7 +54,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 // Entry Point
 extern "C" {
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-    const wchar_t CLASS_NAME[] = L"Object Demonstration";
+    const char CLASS_NAME[] = "Object Demonstration";
 
     WNDCLASS wc = {};
     wc.lpfnWndProc = WindowProc;
@@ -66,7 +66,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     HWND hwnd = CreateWindowEx(
         0,
         CLASS_NAME,
-        L"Moving Objects",
+        "Moving Objects",
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT,
         800, 600,
