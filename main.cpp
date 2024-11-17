@@ -25,9 +25,15 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hwnd, &ps);
 
+        RECT rect;
+        GetClientRect(hwnd, &rect);
+        FillRect(hdcBuffer, &rect, (HBRUSH)(COLOR_WINDOW + 1));
+
         for (const auto& object : objects) {
             object.draw(hdc);
         }
+
+        BitBlt(hdc, 0, 0, rect.right, rect.bottom, hdcBuffer, 0, 0, SRCCOPY);
 
         EndPaint(hwnd, &ps);
         return 0;
