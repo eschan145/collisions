@@ -15,7 +15,7 @@ void initialize(int count, int width, int height) {
         float dx = (rand() % 5) + 1;
         float dy = (rand() % 5) + 1;
 
-        objects.emplace_back(position, dx, dy);
+        objects.emplace_back(position, -1, -1);
     }
 }
 
@@ -78,7 +78,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     ShowWindow(hwnd, nCmdShow);
 
-    initialize(1000, 800, 600);
+    initialize(3, 800, 600);
 
     SetTimer(hwnd, 1, 16, nullptr);
 
