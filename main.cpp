@@ -52,7 +52,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 }
 
 // Entry Point
-extern "C" {
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     const char CLASS_NAME[] = "Object Demonstration";
 
@@ -91,4 +90,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     return 0;
 }
+
+extern "C" {
+    int main() {
+        HINSTANCE hInstance = GetModuleHandle(nullptr);
+        return WinMain(hInstance, nullptr, GetCommandLineA(), SW_SHOWNORMAL);
+    }
 }
