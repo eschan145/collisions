@@ -20,7 +20,9 @@ void initialize(int count, int width, int height) {
 }
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-    static HDC hdcBuffer;
+    static HDC hdc_buffer;
+    static HBITMAP hbm_buffer;
+    static HBRUSH background_brush;
 
     switch (uMsg) {
     case WM_CREATE: {
