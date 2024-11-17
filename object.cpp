@@ -28,8 +28,8 @@ public:
     }
 
     void bounce(int width, int height) {
-        if (this->position.x <= 0 || this->position.x + width >= width) this->dx = -this->dx;
-        if (this->position.y <= 0 || this->position.y + height >= height) this->dy = -this->dy;
+        if (this->position.x <= 0 || this->position.x + this->width >= width) this->dx = -this->dx;
+        if (this->position.y <= 0 || this->position.y + this->height >= height) this->dy = -this->dy;
     }
 
     void draw(HDC hdc) const {
