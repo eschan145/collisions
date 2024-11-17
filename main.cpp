@@ -23,19 +23,34 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
     static HDC hdcBuffer;
 
     switch (uMsg) {
+    case WM_CREATE: {
+        HDC hdc = GetDC(hwnd);
+        RECT rect;
+        GetClientRect(hwnd, &rect);
+
+        hdc_buffer = CreateCompatibleDC(hdc);
+        hbm_buffer = CreateCompatibleBitmap(hdc, rect.right, rect.bottom);
+        SelectObject(hdc_buffer, hbm_buffer);
+
+        background_brush = CreateSolidBrush(RGB(255, 255, 255));
+
+        ReleaseDC(hwnd, hdc);
+        break;
+    }
+
     case WM_PAINT: {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hwnd, &ps);
 
         RECT rect;
         GetClientRect(hwnd, &rect);
-        FillRect(hdcBuffer, &rect, (HBRUSH)(COLOR_WINDOW + 1));
+        FillRect(hdc_buffer, &rect, background_brush);
 
         for (const auto& object : objects) {
             object.draw(hdc);
         }
 
-        BitBlt(hdc, 0, 0, rect.right, rect.bottom, hdcBuffer, 0, 0, SRCCOPY);
+        BitBlt(hdc, 0, 0, rect.right, rect.bottom, hdc_buffer, 0, 0, SRCCOPY);
 
         EndPaint(hwnd, &ps);
         return 0;
